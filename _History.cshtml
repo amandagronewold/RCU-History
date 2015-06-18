@@ -1,0 +1,57 @@
+
+@using ToSic.Eav.DataSources
+@{ 
+    int rowCounter = 0;
+    var mid = Dnn.Module.ModuleID.ToString();
+    var allItems = CreateSource<EntityTypeFilter>();
+    allItems.TypeName = "Event";
+    var sorted = CreateSource<ValueSort>(allItems);
+    	sorted.Attributes = "Year";  
+    	Data.In.Add("Event", sorted["Default"]);
+    }
+
+    
+<ul class="cbp_tmtimeline">
+
+ @foreach (var dict in sorted.List) {
+        var Content = AsDynamic(dict.Value);
+        var Pubs = ((ToSic.Eav.IEntity)AsEntity(Content))
+            .Relationships.AllParents
+            .Where(c => c.Type.Name == "Publications");
+
+	<li>
+@Content.Toolbar
+	<time class="cbp_tmtime" datetime="@Content.Year">@Content.Year</time>
+	<div class="cbp_tmicon @Content.Icon[0].CSSClass">
+	</div>
+	<div class="cbp_tmlabel">
+
+@if(Content.Publications.GetType() != typeof(String) && Content.Publications.Count > 0) { 
+            var publ = Content.Publications[0]; 
+            <div class="accordion history-accordion" id="pubs-@Content.Year">
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<em class="micon-arrow-down-7"></em><a class="accordion-toggle collapsed" href="#collapse-@Content.Year" data-toggle="collapse" data-parent="#pubs-@Content.Year">Published by the RCU in @Content.Year:</a>
+				</div>
+<div class="accordion-body collapsed collapse" id="collapse-@Content.Year">
+					<div class="accordion-inner">
+<ul>
+
+	@foreach(var publi in Content.Publications) {
+      var Public = AsDynamic(publi);
+<li><a href="@Public.issuu" target="_blank">@Public.Name</a></li>
+}
+</ul>
+</div>
+</div>
+</div>
+</div>
+}
+else {
+		@Html.Raw(Content.Description)
+}
+
+	</div>
+</li>
+}
+</ul>
