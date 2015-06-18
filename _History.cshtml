@@ -1,10 +1,9 @@
-
 @using ToSic.Eav.DataSources
 @{ 
     int rowCounter = 0;
     var mid = Dnn.Module.ModuleID.ToString();
     var allItems = CreateSource<EntityTypeFilter>();
-    allItems.TypeName = "Event";
+    allItems.TypeName = "History";
     var sorted = CreateSource<ValueSort>(allItems);
     	sorted.Attributes = "Year";  
     	Data.In.Add("Event", sorted["Default"]);
@@ -18,11 +17,15 @@
         var Pubs = ((ToSic.Eav.IEntity)AsEntity(Content))
             .Relationships.AllParents
             .Where(c => c.Type.Name == "Publications");
-
+		var iconclass = "";
 	<li>
 @Content.Toolbar
+@if(Content.Icon.GetType() != typeof(String) && Content.Icon.Count > 0) {
+		iconclass = Content.Icon[0].CSSClass;
+		}
+
 	<time class="cbp_tmtime" datetime="@Content.Year">@Content.Year</time>
-	<div class="cbp_tmicon @Content.Icon[0].CSSClass">
+	<div class="cbp_tmicon @iconclass">
 	</div>
 	<div class="cbp_tmlabel">
 
