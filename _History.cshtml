@@ -18,6 +18,7 @@
             .Relationships.AllParents
             .Where(c => c.Type.Name == "Publications");
 		var iconclass = "";
+if(Content.Hide != true) {
 	<li>
 @Content.Toolbar
 @if(Content.Icon.GetType() != typeof(String) && Content.Icon.Count > 0) {
@@ -40,5 +41,6 @@
 
 	</div>
 </li>
+}
 }
 </ul>
