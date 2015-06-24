@@ -1,0 +1,46 @@
+@using ToSic.Eav.DataSources
+@{ 
+    int rowCounter = 0;
+    var mid = Dnn.Module.ModuleID.ToString();
+    var allItems = CreateSource<EntityTypeFilter>();
+    allItems.TypeName = "History";
+    var sorted = CreateSource<ValueSort>(allItems);
+    	sorted.Attributes = "Year";  
+    	Data.In.Add("Event", sorted["Default"]);
+    }
+
+    
+<ul class="cbp_tmtimeline">
+
+ @foreach (var dict in sorted.List) {
+        var Content = AsDynamic(dict.Value);
+        var Pubs = ((ToSic.Eav.IEntity)AsEntity(Content))
+            .Relationships.AllParents
+            .Where(c => c.Type.Name == "Publications");
+		var iconclass = "";
+
+	<li>
+@Content.Toolbar
+@if(Content.Icon.GetType() != typeof(String) && Content.Icon.Count > 0) {
+		iconclass = Content.Icon[0].CSSClass;
+		}
+
+	<time class="cbp_tmtime" datetime="@Content.Year">@Content.Year</time>
+	<div class="cbp_tmicon @iconclass">
+	</div>
+	<div class="cbp_tmlabel">
+	
+	@Html.Raw(Content.Description)
+
+@if(Content.Publications.GetType() != typeof(String) && Content.Publications.Count > 0) { 
+	
+<a class="rox_short_button dark" href="@Content.Publications[0].issuu" target="_blank"><em class="micon-book-2"></em> Read now</a>
+}
+
+		
+
+	</div>
+</li>
+}
+
+</ul>

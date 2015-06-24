@@ -1,0 +1,74 @@
+<style>
+
+/* This CSS is pasted into the Header section in the History app's module settings. */
+
+// Ag
+.cbp_tmicon-leaf:before                { content: "\e032" }
+
+// Science
+.cbp_tmicon-beaker:before                { content: "\e241" }
+
+// Legislation
+.cbp_tmicon-gavel:before                { content: "\f0e3" }
+
+// Multiple people
+.cbp_tmicon-people:before                { content: "\e174" }
+
+// Person
+.cbp_tmicon-person:before                { content: "\e175" }
+
+// Building
+.cbp_tmicon-buildings:before			{ content: "\e1e8" }
+
+// Assessment
+.cbp_tmicon-graph:before			{ content: "\e19f" }
+
+// Structure
+.cbp_tmicon-cube:before			{ content: "\e1a2" }
+
+// Four
+.cbp_tmicon-four:before			{ content: "\e1e6" }
+
+// Graduation
+.cbp_tmicon-grad:before			{ content: "\e036" }
+
+// Pub
+.cbp_tmicon-pub:before				{ content: "\e166" }
+
+
+/*  pubs gray 
+li.timeline-pub .cbp_tmtime { font-size: 1.5em; }
+li.timeline-pub .cbp_tmicon { width: 30px; height: 30px; font-size: 1.15em; background: #600; box-shadow: none; margin-left: -20px; line-height: 30px; }
+li.timeline-pub .cbp_tmlabel { padding: .1em 0; left: -60px; width: 100%; font-size: .9em; background: none !important; color: #444; }
+	li.timeline-pub a { color: #444; }
+	li.timeline-pub a:hover { color: #600; }
+li.timeline-pub .cbp_tmlabel:after { content: normal !important; }
+*/
+
+
+/* accordions */
+.history-accordion ul {
+list-style-type: none;
+}
+
+.history-accordion .accordion-toggle {
+font-family: Lusitana;
+  text-decoration: none;
+  font-size: 1.6em;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  margin-left: 10px;
+  font-weight: Normal;
+  }
+.history-accordion .accordion-toggle a:hover {
+color: #fff;
+}
+
+.cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel a:hover {
+color: #95A5A6;
+}
+.cbp_tmtimeline li a:hover {
+color: #d7e2e3;
+}
+
+</style>
